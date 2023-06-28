@@ -1,35 +1,28 @@
 import { Request, Response } from "express";
 import Stripe from "stripe";
 import { PORT, STRIPE_KEY } from "../const";
+import { createProducts } from "../seeds/products.seed";
+import { randomNumber } from "../utils";
 
 const stripe = new Stripe(STRIPE_KEY, { apiVersion: "2022-11-15" });
 
 const createSession = async (req: Request, res: Response) => {
+  const getProducts = createProducts(randomNumber(1,5))
+  
   // fake items
-  const items = [
-    {
+  const items = getProducts.map((product) => {
+    return {
       price_data: {
         product_data: {
-          name: "product 1",
-          description: "gaming lagtog",
+          name: product.name,
+          description: product.description,
         },
         currency: "usd",
-        unit_amount: 20000, //centavos
+        unit_amount: product.price, //centavos
       },
-      quantity: 1,
-    },
-    {
-      price_data: {
-        product_data: {
-          name: "product 2",
-          description: "dumb TV",
-        },
-        currency: "usd",
-        unit_amount: 50000, //centavos
-      },
-      quantity: 2,
-    },
-  ];
+      quantity: randomNumber(1,5),
+    }
+  })
 
   const session = await stripe.checkout.sessions.create({
     line_items: items,
