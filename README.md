@@ -2,6 +2,8 @@
 
 Nodejs project for accept pays from stripe
 
+- Note: Needs refactor to get data from request
+
 ## Setup
 
 ```bash
@@ -29,3 +31,7 @@ yarn add -D @types/express typescript ts-node-dev
 ```bash
 npx tsc --init
 ```
+
+![alt text for screen readers](/resources/Screenshot_2023-06-28_1.png "Static interface")
+
+![alt text for screen readers](/resources/Screenshot_2023-06-28_2.png "Stripe checkout")
