@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Store</title>
+  </head>
+  <body>
+    <h1>This is an Store, you can select a los of items an the go to pay</h1>
+    <button id="checkout">Pay</button>
+
+    <script>
+      const btn = document.getElementById("checkout");
+
+      btn.addEventListener("click", async () => {
+        const res = await fetch("/create-checkout-session", {
+          method: "POST",
+        });
+
+        const data = await res.json();
+
+        console.log("DATA", data);
+
+        window.location.href = data.url;
+      });
+    </script>
+  </body>
+</html>

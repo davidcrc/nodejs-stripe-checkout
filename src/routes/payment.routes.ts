@@ -1,12 +1,13 @@
 import { Router } from "express";
+import { PaymentController } from "../controllers/payment.controller";
 
 const router = Router();
 
 // generar una especie de orden de compra
-router.get("/create-checkout-session", (req, res) => res.send("checkout"));
+router.post("/create-checkout-session", PaymentController.createSession);
 
-router.get("/success", (req, res) => res.send("success"));
+router.get("/success", (req, res) => res.redirect("/success.html"));
 
-router.get("/cancel", (req, res) => res.send("cancel"));
+router.get("/cancel", (req, res) => res.redirect("/"));
 
 export default router;
